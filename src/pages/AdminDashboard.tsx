@@ -97,7 +97,7 @@ const AdminDashboard: React.FC = () => {
           </div>
           <div className="flex items-center gap-4">
             <span className="text-sm text-muted-foreground hidden sm:block">
-              Welcome, {user.name}
+              Welcome, {user.email}
             </span>
             <Button variant="ghost" size="sm" onClick={handleLogout}>
               <LogOut className="w-4 h-4 mr-2" />
