@@ -443,7 +443,7 @@
 
 //     if (photo) data.append("photo", photo);
 
-//     await axios.post("http://localhost:5000/api/admin/students", data, {
+//     await axios.post("https://hostelattendance-hl87.onrender.com/api/admin/students", data, {
 //       headers: {
 //         Authorization: `Bearer ${token}`,
 //         "Content-Type": "multipart/form-data",
@@ -762,7 +762,7 @@ const [photo, setPhoto] = useState<File | null>(null);
       const token = localStorage.getItem("token");
 
       const res = await axios.get(
-        "http://localhost:5000/api/admin/students",
+        "https://hostelattendance-hl87.onrender.com/api/admin/students",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -832,7 +832,7 @@ const handleAddStudent = async () => {
 
     if (photo) data.append("photo", photo);
 
-    await axios.post("http://localhost:5000/api/admin/students", data, {
+    await axios.post("https://hostelattendance-hl87.onrender.com/api/admin/students", data, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "multipart/form-data",
@@ -974,7 +974,7 @@ const handleAddStudent = async () => {
                               className="w-9 h-9 rounded-full"
                             /> */}
                             <img
-  src={`http://localhost:5000${s.photo}`}
+  src={`https://hostelattendance-hl87.onrender.com${s.photo}`}
   className="w-9 h-9 rounded-full"
 />
                             <div>
