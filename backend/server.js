@@ -7,17 +7,21 @@ import connectDB from "./src/config/db.js";
 import authRoutes from "./src/routes/authRoutes.js";
 import adminRoutes from "./src/routes/adminRoutes.js";
 import faceAuthRoutes from "./src/routes/faceAuth.routes.js";
+import networkLock from "./networkLock.js";
 
 dotenv.config();
 
 const app = express();
+
+// ✅ Deploy/proxy safe
+app.set("trust proxy", true);
 
 // ==========================
 // CORS
 // ==========================
 app.use(
   cors({
-    origin: "http://localhost:8080",
+    origin: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
@@ -36,6 +40,12 @@ connectDB();
 console.log("🔥 SERVER FILE LOADED");
 
 // ==========================
+// 🔐 NETWORK LOCK ONLY ON VERIFY ENDPOINT
+// ==========================
+// Sirf /api/face-attendance pe network check chalega
+app.use("/api/face-attendance", networkLock);
+
+// ==========================
 // ROUTES
 // ==========================
 
@@ -45,7 +55,7 @@ app.use("/api/auth", authRoutes);
 // Admin routes
 app.use("/api/admin", adminRoutes);
 
-// ✅ Face attendance route (IMPORTANT CHANGE)
+// Face attendance route
 app.use("/api", faceAuthRoutes);
 
 // ==========================
@@ -65,6 +75,6 @@ app.get("/api/test", (req, res) => {
 // ==========================
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
