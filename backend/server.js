@@ -13,18 +13,18 @@ dotenv.config();
 
 const app = express();
 
-// ✅ Deploy/proxy safe
+// ✅ Deploy / proxy safe
 app.set("trust proxy", true);
 
 // ==========================
 // CORS
 // ==========================
 app.use(
-  cors({
-    origin: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  })
+cors({
+origin: true,
+methods: ["GET", "POST", "PUT", "DELETE"],
+credentials: true,
+})
 );
 
 // ==========================
@@ -40,10 +40,10 @@ connectDB();
 console.log("🔥 SERVER FILE LOADED");
 
 // ==========================
-// 🔐 NETWORK LOCK ONLY ON VERIFY ENDPOINT
+// 🔐 NETWORK LOCK ON LOGIN ONLY
 // ==========================
-// Sirf /api/face-attendance pe network check chalega
-app.use("/api/face-attendance", networkLock);
+// Sirf login par network check lagega
+app.use("/api/auth/login", networkLock);
 
 // ==========================
 // ROUTES
@@ -64,10 +64,10 @@ app.use("/api", faceAuthRoutes);
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
 // ==========================
-// TEST ROUTE (Optional Debug)
+// TEST ROUTE
 // ==========================
 app.get("/api/test", (req, res) => {
-  res.json({ message: "Server working" });
+res.json({ message: "Server working" });
 });
 
 // ==========================
@@ -76,5 +76,5 @@ app.get("/api/test", (req, res) => {
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`🚀 Server running on port ${PORT}`);
+console.log(`🚀 Server running on port ${PORT}`);
 });
