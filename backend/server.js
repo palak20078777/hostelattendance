@@ -43,6 +43,10 @@ console.log("🔥 SERVER FILE LOADED");
 // 🔐 NETWORK LOCK ON LOGIN ONLY
 // ==========================
 // Sirf login par network check lagega
+app.use("/api/auth/login", (req, res, next) => {
+  console.log("✅ login middleware reached");
+  next();
+});
 app.use("/api/auth/login", networkLock);
 
 // ==========================
